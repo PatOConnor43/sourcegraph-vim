@@ -20,9 +20,10 @@ noremap <silent> <unique> <script> <Plug>OpenCommand :call <SID>OpenCommand()<CR
 
 function! s:OpenCommand() abort
     let s:remote_url = sourcegraph#getRemoteUrl()
-    let s:branch = sourcegraph#getBranch()
+    let s:commit = sourcegraph#getCommit()
     let s:relative_path = expand('%')
-    call system('open https://google.com')
-
+    let g:built_url = sourcegraph#buildUrl(s:remote_url, s:commit, s:relative_path)
+    echo g:built_url
+    let @+ = g:built_url
 
 endfunction
