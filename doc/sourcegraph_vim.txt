@@ -37,7 +37,7 @@ This command will generate a Sourcegraph url and will put it in your clipboard
 (if clipboard support is enabled) as well as use echomsg to print the URL to 
 the screen, such as: >
 
-    Placeholder: Hey thanks for reading the docs!
+    https://sourcegraph.com/github.com/PatOConnor43/sourcegraph-vim@76258522672f2e238af20363a3fd3539602b5f55/-/blob/doc/sourcegraph_vim.txt#L40
 
 ==============================================================================
 Section 2: Config                                         *SourcegraphVimConfig*
