@@ -22,13 +22,15 @@ function! sourcegraph#getCommit() abort
     return sourcegraph#trim(system('git rev-parse HEAD'))
 endfunction
 
-function! sourcegraph#buildUrl(remote_url, commit, relative_path) abort
-    let g:host = split(split(a:remote_url, '@')[1], ':')[0]
-    let g:user = split(split(a:remote_url, ':')[1], '/')[0]
-    let g:repo = split(split(a:remote_url, '/')[1], '\.')[0]
-    echo g:host
-	echo g:user
-	echo g:repo
-    echo a:relative_path
-    return g:sourcegraph_url . g:host . '/' . g:user . '/' . g:repo . '@' . a:commit . '/-/blob/' . a:relative_path . '#L1'
+" Builds the url given all the repository information
+function! sourcegraph#buildUrl(remote_url, commit, relative_path, first, last) abort
+    let l:host = split(split(a:remote_url, '@')[1], ':')[0]
+    let l:user = split(split(a:remote_url, ':')[1], '/')[0]
+    let l:repo = split(split(a:remote_url, '/')[1], '\.')[0]
+    let l:line_anchor = '#L' . a:first
+    if a:first != a:last
+        let l:line_anchor = '#L' . a:first . '-L' . a:last
+    endif
+
+    return g:sourcegraph_vim_url . l:host . '/' . l:user . '/' . l:repo . '@' . a:commit . '/-/blob/' . a:relative_path . l:line_anchor
 endfunction
